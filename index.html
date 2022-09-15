@@ -21,56 +21,23 @@
       <div class="container_content">
         
         <div class="container_space_to_bet">
-            <h2 class="new_bet"><strong>NEW BET</strong> FOR MEGA-SENA</h2>
+            <h2 class="new_bet"><strong>NEW BET</strong> <span data-js="nome-do-jogo"></span> </h2>
             <p class="text_choose">Choose a game</p>
 
-          <div class="Games">
-            <input class="game_loto"  type="loto" value="Lotofácil">
-            <input class="game_mega"  type="mega" value="Mega-Sena">
-            <input class="game_mania"  type="mania" value="Lotomania">
+            <div  class="Games" data-js="buttons-game"></div>
+            <!-- <button class="game_loto" id="0"  type="button" data-js="loto"></button>
+            <button class="game_mega" id="1" type="button" data-js="mega"></button>
+            <button class="game_mania" id="2" type="button" data-js="quina"></button> -->
+          
+            <p class="text_Fill_you_Bet">
+              <strong>Fill your bet</strong> <br> <span data-js="descricao-do-jogo"></span>
+            </p>
+
+          <div class="container_boll" data-js="boll-games">
+             <div class="click_boll" data-js="click_boll"></div>
           </div>
 
-          <p class="text_Fill_you_Bet">
-            <strong>Fill your bet</strong> <br>Mark as many numbers as you want up to a maximum of 50. Win by hitting 15, 16, 17, 18, 19, 20 or none of the 20 numbers drawn.
-          </p>
-          <div class="container_boll">
-              <a class="bolas" href=""> 01 </a>
-              <a class="bolas1" href=""> 02 </a>
-              <a class="bolas1" href=""> 03 </a>
-              <a class="bolas1" href=""> 04 </a>
-              <a class="bolas1" href=""> 05 </a>
-              <a class="bolas1" href=""> 06 </a>
-              <a class="bolas1" href=""> 07 </a>
-              <a class="bolas1" href=""> 08 </a>
-              <a class="bolas1" href=""> 09 </a>
-              <a class="bolas2" href=""> 10 </a>
-              <a class="bolas3" href=""> 11 </a>
-              <a class="bolas3" href=""> 12 </a>
-              <a class="bolas3" href=""> 13 </a>
-              <a class="bolas3" href=""> 14 </a>
-              <a class="bolas3" href=""> 15 </a>
-              <a class="bolas3" href=""> 16 </a>
-              <a class="bolas3" href=""> 17 </a>
-              <a class="bolas3" href=""> 18 </a>
-              <a class="bolas4" href=""> 19 </a>
-              <a class="bolas5" href=""> 20 </a>
-              <a class="bolas5" href=""> 21 </a>
-              <a class="bolas5" href=""> 22 </a>
-              <a class="bolas5" href=""> 23 </a>
-              <a class="bolas5" href=""> 24 </a>
-              <a class="bolas5" href=""> 25 </a>
-              <a class="bolas5" href=""> 26 </a>
-              <a class="bolas5" href=""> 27 </a>
-              <a class="bolas6" href=""> 28 </a>
-              <a class="bolas7" href=""> 29 </a>
-              <a class="bolas7" href=""> 30 </a>
-              <a class="bolas7" href=""> 31 </a>
-              <a class="bolas7" href=""> 32 </a>
-              <a class="bolas7" href=""> 33 </a>
-              <a class="bolas7" href=""> 34 </a>
-              <a class="bolas7" href=""> 35 </a>
-              <a class="bolas7" href=""> 36 </a>
-        </div>
+
           <div class="button_container">
             <button class="button_game" type="button" value="Complete game">Complete game</button>
             <button class="button_clear_game" type="button" value="Clear game">Clear game</button>
@@ -78,6 +45,7 @@
               <img src="assets/img/shopping_cart.png" style="float:left;width:35px "/>
             Add to cart</button>
           </div>
+          
         </div>
 
         <div class="container_cart">
@@ -102,6 +70,11 @@
         </div>
       </div>
 
-    </body>
+      <footer>
+        
+      </footer>
 
+    </body>
+    <script src="./scripts/index.js"></script>
+    <script src="./scripts/dom32.js"></script>
 </html>
