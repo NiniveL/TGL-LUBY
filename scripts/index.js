@@ -3,6 +3,7 @@
   let jogoSelecionado;
   let games;
   let selectedNumbers = [];
+  let gameButtons;
    
 
   function initTogetherPage() {
@@ -20,35 +21,22 @@
         jogoSelecionado = games.types[0];
         createGame();
         initGamesButton();
-        
+        completeGame()
       };
     });
   };
 
-
+  // essa função muda o nome de cada jogo quando for clicado
   function mudarJogo() {
     jogoSelecionado = games.types[this.id];
     
-    console.log('botão clicado:', jogoSelecionado); 
-    
-    games.types.forEach((type) => {
-
-      if(jogoSelecionado == type) {
-        console.log('selecionado:', type);
-
-        this.style.border = `2px solid.color(${jogoSelecionado.color})`;
-        this.style["background-color"] = jogoSelecionado.color;
-        this.style["color"] = 'white'
-        
-      }else {
-        console.log('Não selecionado:', type); 
-
-        this.style.border = `2px solid.color(${jogoSelecionado.color})`;
-        this.style["background-color"] = 'white';
-        this.style["color"] = jogoSelecionado.color;   
-      }
-      
-    }); 
+    gameButtons.forEach((button) => {
+      const gameColor = games.types.find(type => type.type === button.className).color;
+      button.style.backgroundColor = 'white';
+      button.style.color = gameColor; 
+    });
+      this.style["background-color"] = jogoSelecionado.color;
+      this.style["color"] = 'white'; 
     createGame(); 
   };
 
@@ -75,6 +63,7 @@
       $buttonBoll.addEventListener('click', clickButton,);
       $bollGame.appendChild($buttonBoll);
     }
+    
   }
   
   // essa função é para chamar a quantidade certa de cada jogo que for selecionado
@@ -93,13 +82,27 @@
     }else{
       this.style["background-color"] = '#ADC0C4'
       selectedNumbers.splice(numberExist, 1);
-    }
-    
+    }  
   };
 
+  function completeGame() {
+    // let $bollGame = window.DOM('[data-js="boll-games"]').get();
+    // let $buttonBoll = $bollGame.querySelectorAll('.bolas');
+    // let maxNumbers = jogoSelecionado.min_and_max_number;
+    // for (let i = 0; i < maxNumbers; i++) {
+    //   // $buttonBoll[i].style.border = `2px solid.color(${jogoSelecionado.color})`;
+    //   // $buttonBoll[i].style["background-color"] = jogoSelecionado.color;
+    //  for(let j = 0; j < maxNumbers; j++) {
+    //   Math.floor(Math.random() * maxNumbers);
+    //   selectedNumbers.push($buttonBoll[j].id);
+    //  }
+    //   }
+  }
 
-  function initEvent() { 
-   
+  
+      
+  function initEvent() {
+
   }
 
   // essa função esta fazendo mudar de um jogo para outro, lotofacil, mega e Quina
@@ -116,6 +119,8 @@
       $buttonsContainer.appendChild($buttonGame);
       console.log($buttonGame);
     })
+    gameButtons = Array.from(document.querySelectorAll('[data-js="games"]'));
+    doc.querySelector('[data-js="complete-game"]').addEventListener('click', completeGame);
   };
 
   initTogetherPage()

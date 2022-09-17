@@ -213,7 +213,7 @@ header {
   height: 100%;
 }
 
-.button_game {
+.button_complete_game{
   margin-top: 40px ;
   margin-left: 320px;
   width: 164px;
@@ -247,7 +247,7 @@ header {
   padding-left: 20px;
   width: 209px;
   height: 52px;
-  background: #27C383 0% 0% no-repeat padding-box;
+  background:#27C383 0% 0% no-repeat padding-box;
   border: 1px solid #27C383;
   border-radius: 10px;
   text-align: center;
