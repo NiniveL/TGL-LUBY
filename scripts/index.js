@@ -65,18 +65,24 @@
 
   // essa função ela completa o game total ou parte dele se o cliente não escolher.
   function completGame() {
+    const existNumber = randomNumbers(jogoSelecionado.range)
+    const emptyNumbers = jogoSelecionado.min_and_max_number - selectedNumbers.length
     
-    let emptyNumbers = jogoSelecionado.min_and_max_number - selectedNumbers.length
     this.style["background-color"] = jogoSelecionado.color;
     this.style["color"] = 'white';
     
     for (let i = 0; i < emptyNumbers; i++) {
       selectedNumbers.push(randomNumbers(jogoSelecionado.range));
+      
     }
     
+    
     console.log('test:', selectedNumbers)
-    console.log('test2:')
+    console.log('test3:', existNumber)
   }
+    
+    
+  
 
 
   // essa função ela trás os números do complete game aleatórios.
