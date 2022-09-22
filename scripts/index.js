@@ -1,14 +1,14 @@
-(($,doc) => {
+(($, doc) => {
   "use strict";
   let jogoSelecionado;
   let games;
   let selectedNumbers = [];
   let gameButtons;
-   
+
 
   function initTogetherPage() {
     readyFileGamesJson();
-    initEvent();
+    initButtonEvent()
   };
 
   function readyFileGamesJson() {
@@ -21,24 +21,83 @@
         jogoSelecionado = games.types[0];
         createGame();
         initGamesButton();
-        completeGame()
+        // completGame()
       };
     });
   };
 
-  // essa função muda o nome de cada jogo quando for clicado
+  // essa função ela muda o jogo e coloca a cor do jogo selecionado
   function mudarJogo() {
     jogoSelecionado = games.types[this.id];
-    
-    gameButtons.forEach((button) => {
+    selectedNumbers = [];
+
+    gameButtons.forEach((button => {
       const gameColor = games.types.find(type => type.type === button.className).color;
       button.style.backgroundColor = 'white';
-      button.style.color = gameColor; 
-    });
-      this.style["background-color"] = jogoSelecionado.color;
-      this.style["color"] = 'white'; 
-    createGame(); 
+      button.style.color = gameColor;
+    }))
+
+    this.style["background-color"] = jogoSelecionado.color;
+    this.style["color"] = 'white';
+    createGame();
   };
+
+  // essa função é para chamar a quantidade certa de cada jogo que for selecionado
+  function clickButton() {
+    const selectedAmount = selectedNumbers.length;
+    const maxNumbers = jogoSelecionado.min_and_max_number;
+    const numberExist = selectedNumbers.findIndex(item => item === this.id);
+    console.log(selectedAmount)
+
+    if (numberExist == -1) {
+      if (selectedAmount > maxNumbers - 1) {
+        return false;
+      }
+      this.style.border = `2px solid.color(${jogoSelecionado.color})`;
+      this.style["background-color"] = jogoSelecionado.color;
+      selectedNumbers.push(this.id);
+    } else {
+      this.style["background-color"] = '#ADC0C4'
+      selectedNumbers.splice(numberExist, 1);
+    }
+    
+  };
+
+  // essa função ela completa o game total ou parte dele se o cliente não escolher.
+  function completGame() {
+    
+    let emptyNumbers = jogoSelecionado.min_and_max_number - selectedNumbers.length
+    this.style["background-color"] = jogoSelecionado.color;
+    this.style["color"] = 'white';
+    
+    for (let i = 0; i < emptyNumbers; i++) {
+      selectedNumbers.push(randomNumbers(jogoSelecionado.range));
+    }
+    
+    console.log('test:', selectedNumbers)
+    console.log('test2:')
+  }
+
+
+  // essa função ela trás os números do complete game aleatórios.
+  function randomNumbers(max) {
+    let num = Math.ceil(Math.random() * max);
+    while (selectedNumbers.indexOf(num) >= 0) {
+      num = Math.ceil(Math.random() * max);
+    }
+    return num
+  }
+
+  function cleanGame() {
+    this.style["background-color"] = jogoSelecionado.color;
+    this.style["color"] = 'white';
+    selectedNumbers = [];
+    createBoll()
+  }
+
+  function addToCart() {
+
+  }
 
   // essa função é a descrição de cada jogo.
   function createGame() {
@@ -52,8 +111,8 @@
   // essa função é para chamar as bolas de cada jogo que for selecionado.
   function createBoll() {
     let $bollGame = window.DOM('[data-js="boll-games"]').get();
-    $bollGame.textContent=""
-    
+    $bollGame.textContent = ""
+
     for (let i = 1; i <= jogoSelecionado.range; i++) {
       let $buttonBoll = document.createElement('button');
       $buttonBoll.className = 'bolas';
@@ -63,47 +122,14 @@
       $buttonBoll.addEventListener('click', clickButton,);
       $bollGame.appendChild($buttonBoll);
     }
-    
-  }
-  
-  // essa função é para chamar a quantidade certa de cada jogo que for selecionado
-  function clickButton() {
-    const selectedAmount = selectedNumbers.length;
-    const maxNumbers = jogoSelecionado.min_and_max_number;
-    const numberExist = selectedNumbers.findIndex(item => item === this.id);
-
-    if(numberExist == -1) {
-      if(selectedAmount > maxNumbers -1) {
-        return false;
-      }
-      this.style.border = `2px solid.color(${jogoSelecionado.color})`;
-      this.style["background-color"] = jogoSelecionado.color;
-      selectedNumbers.push(this.id);
-    }else{
-      this.style["background-color"] = '#ADC0C4'
-      selectedNumbers.splice(numberExist, 1);
-    }  
-  };
-
-  function completeGame() {
-    // let $bollGame = window.DOM('[data-js="boll-games"]').get();
-    // let $buttonBoll = $bollGame.querySelectorAll('.bolas');
-    // let maxNumbers = jogoSelecionado.min_and_max_number;
-    // for (let i = 0; i < maxNumbers; i++) {
-    //   // $buttonBoll[i].style.border = `2px solid.color(${jogoSelecionado.color})`;
-    //   // $buttonBoll[i].style["background-color"] = jogoSelecionado.color;
-    //  for(let j = 0; j < maxNumbers; j++) {
-    //   Math.floor(Math.random() * maxNumbers);
-    //   selectedNumbers.push($buttonBoll[j].id);
-    //  }
-    //   }
   }
 
-  
-      
-  function initEvent() {
-
+  function initButtonEvent() {
+    doc.querySelector('[data-js="complete-game"]').addEventListener('click', completGame);
+    doc.querySelector('[data-js="clear-game"]').addEventListener('click', cleanGame);
+    doc.querySelector('[data-js="add-to-cart"]').addEventListener('click', addToCart);
   }
+
 
   // essa função esta fazendo mudar de um jogo para outro, lotofacil, mega e Quina
   function initGamesButton() {
@@ -117,14 +143,12 @@
       $buttonGame.setAttribute("data-js", "games");
       $buttonGame.addEventListener('click', mudarJogo);
       $buttonsContainer.appendChild($buttonGame);
-      console.log($buttonGame);
+      console.log($buttonGame)
     })
     gameButtons = Array.from(document.querySelectorAll('[data-js="games"]'));
-    doc.querySelector('[data-js="complete-game"]').addEventListener('click', completeGame);
+
+
   };
 
   initTogetherPage()
 })(window, document)
-
-
-
