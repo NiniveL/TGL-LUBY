@@ -21,7 +21,7 @@
         jogoSelecionado = games.types[0];
         createGame();
         initGamesButton();
-        // completGame()
+        
       };
     });
   };
@@ -46,10 +46,9 @@
   function clickButton(param) {
     const button = this ? this : param
     const selectedAmount = selectedNumbers.length;
-    console.log('select:', selectedAmount);
     const maxNumbers = jogoSelecionado.min_and_max_number;
     const numberExist = selectedNumbers.findIndex(item =>  item === button.id)
-    console.log('numberExist:', numberExist);
+    
     if (numberExist == -1) {
       if (selectedAmount > maxNumbers - 1) {
         return false;
@@ -69,7 +68,7 @@
     let $bolls = window.DOM('[data-js="boll-games"]').get().children;
     let bollsArray = Array.from($bolls)
     const emptyNumbers = jogoSelecionado.min_and_max_number - selectedNumbers.length
-    console.log(emptyNumbers)
+    
 
     this.style["background-color"] = jogoSelecionado.color;
     this.style["color"] = 'white';
@@ -81,7 +80,7 @@
         return +value.id === existNumbers
       })
       clickButton($boll)
-      console.log(selectedNumbers)
+      
     }
   } 
     
