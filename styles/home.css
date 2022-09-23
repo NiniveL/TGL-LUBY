@@ -395,7 +395,7 @@ header {
   height: 96px;
   background: #F4F4F4 0% 0% no-repeat padding-box;
   border: 1px solid #E2E2E2;
-  border-radius: 10px;
+  border-radius: 0px 0px 10px 10px;
   opacity: 1;
 }
 

@@ -43,48 +43,48 @@
   };
 
   // essa função é para chamar a quantidade certa de cada jogo que for selecionado
-  function clickButton() {
+  function clickButton(param) {
+    const button = this ? this : param
     const selectedAmount = selectedNumbers.length;
+    console.log('select:', selectedAmount);
     const maxNumbers = jogoSelecionado.min_and_max_number;
-    const numberExist = selectedNumbers.findIndex(item => item === this.id);
-    console.log(selectedAmount)
-
+    const numberExist = selectedNumbers.findIndex(item =>  item === button.id)
+    console.log('numberExist:', numberExist);
     if (numberExist == -1) {
       if (selectedAmount > maxNumbers - 1) {
         return false;
       }
-      this.style.border = `2px solid.color(${jogoSelecionado.color})`;
-      this.style["background-color"] = jogoSelecionado.color;
-      selectedNumbers.push(this.id);
-    } else {
-      this.style["background-color"] = '#ADC0C4'
+      button.style.border = `2px solid.color(${jogoSelecionado.color})`;
+      button.style["background-color"] = jogoSelecionado.color;
+      selectedNumbers.push(button.id);
+    } else{
+      button.style["background-color"] = '#ADC0C4'
       selectedNumbers.splice(numberExist, 1);
+      console.log('entrou aqui');
     }
-    
   };
 
   // essa função ela completa o game total ou parte dele se o cliente não escolher.
   function completGame() {
-    const existNumber = randomNumbers(jogoSelecionado.range)
+    let $bolls = window.DOM('[data-js="boll-games"]').get().children;
+    let bollsArray = Array.from($bolls)
     const emptyNumbers = jogoSelecionado.min_and_max_number - selectedNumbers.length
-    
+    console.log(emptyNumbers)
+
     this.style["background-color"] = jogoSelecionado.color;
     this.style["color"] = 'white';
     
     for (let i = 0; i < emptyNumbers; i++) {
-      selectedNumbers.push(randomNumbers(jogoSelecionado.range));
-      
+      console.log(emptyNumbers)
+      const existNumbers = randomNumbers(jogoSelecionado.range);
+      const $boll = bollsArray.find(value => {
+        return +value.id === existNumbers
+      })
+      clickButton($boll)
+      console.log(selectedNumbers)
     }
+  } 
     
-    
-    console.log('test:', selectedNumbers)
-    console.log('test3:', existNumber)
-  }
-    
-    
-  
-
-
   // essa função ela trás os números do complete game aleatórios.
   function randomNumbers(max) {
     let num = Math.ceil(Math.random() * max);
@@ -125,7 +125,7 @@
       $buttonBoll.id = i;
       $buttonBoll.type = 'button';
       $buttonBoll.textContent = i;
-      $buttonBoll.addEventListener('click', clickButton,);
+      $buttonBoll.addEventListener('click', clickButton);
       $bollGame.appendChild($buttonBoll);
     }
   }
@@ -151,9 +151,7 @@
       $buttonsContainer.appendChild($buttonGame);
       console.log($buttonGame)
     })
-    gameButtons = Array.from(document.querySelectorAll('[data-js="games"]'));
-
-
+    gameButtons = Array.from(document.querySelectorAll('[data-js="games"]')); 
   };
 
   initTogetherPage()
