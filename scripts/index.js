@@ -50,7 +50,7 @@
     const numberExist = selectedNumbers.findIndex(item =>  item === button.id)
     
     if (numberExist == -1) {
-      if (selectedAmount > maxNumbers - 1) {
+      if (selectedAmount > maxNumbers -1) {
         return false;
       }
       button.style.border = `2px solid.color(${jogoSelecionado.color})`;
@@ -59,7 +59,7 @@
     } else{
       button.style["background-color"] = '#ADC0C4'
       selectedNumbers.splice(numberExist, 1);
-      console.log('entrou aqui');
+      
     }
   };
 
@@ -68,31 +68,29 @@
     let $bolls = window.DOM('[data-js="boll-games"]').get().children;
     let bollsArray = Array.from($bolls)
     const emptyNumbers = jogoSelecionado.min_and_max_number - selectedNumbers.length
-    
 
     this.style["background-color"] = jogoSelecionado.color;
     this.style["color"] = 'white';
     
     for (let i = 0; i < emptyNumbers; i++) {
-      console.log(emptyNumbers)
       const existNumbers = randomNumbers(jogoSelecionado.range);
-      const $boll = bollsArray.find(value => {
+      const $boll = bollsArray.find(value => { 
         return +value.id === existNumbers
       })
-      clickButton($boll)
-      
+      clickButton($boll)  
     }
   } 
     
   // essa função ela trás os números do complete game aleatórios.
   function randomNumbers(max) {
     let num = Math.ceil(Math.random() * max);
-    while (selectedNumbers.indexOf(num) >= 0) {
-      num = Math.ceil(Math.random() * max);
+    while (selectedNumbers.indexOf(num.toString()) >= 0) {
+      num = Math.ceil(Math.random() * max); 
     }
     return num
   }
 
+  // essa função ela limpa o jogo.
   function cleanGame() {
     this.style["background-color"] = jogoSelecionado.color;
     this.style["color"] = 'white';
@@ -100,8 +98,22 @@
     createBoll()
   }
 
-  function addToCart() {
+  function addGameToCart() {
+    let $gameToCart = window.DOM('[data-js="cart-carrinho"]').get().children;
 
+    console.log('o que é:', $gameToCart);
+  }
+
+  function addToCart() {
+    let numberCart = selectedNumbers;
+    
+    numberCart.sort((a, b) => {
+      return a - b;
+    });
+    
+    console.log(numberCart)
+    numberCart.push(this.id);
+    addGameToCart()
   }
 
   // essa função é a descrição de cada jogo.
@@ -117,7 +129,7 @@
   function createBoll() {
     let $bollGame = window.DOM('[data-js="boll-games"]').get();
     $bollGame.textContent = ""
-
+    
     for (let i = 1; i <= jogoSelecionado.range; i++) {
       let $buttonBoll = document.createElement('button');
       $buttonBoll.className = 'bolas';
@@ -126,6 +138,7 @@
       $buttonBoll.textContent = i;
       $buttonBoll.addEventListener('click', clickButton);
       $bollGame.appendChild($buttonBoll);
+      
     }
   }
 
@@ -148,7 +161,6 @@
       $buttonGame.setAttribute("data-js", "games");
       $buttonGame.addEventListener('click', mudarJogo);
       $buttonsContainer.appendChild($buttonGame);
-      console.log($buttonGame)
     })
     gameButtons = Array.from(document.querySelectorAll('[data-js="games"]')); 
   };
