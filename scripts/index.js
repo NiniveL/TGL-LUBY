@@ -20,8 +20,7 @@
         games = JSON.parse(ajax.responseText);
         jogoSelecionado = games.types[0];
         createGame();
-        initGamesButton();
-        
+        initGamesButton();   
       };
     });
   };
@@ -58,8 +57,7 @@
       selectedNumbers.push(button.id);
     } else{
       button.style["background-color"] = '#ADC0C4'
-      selectedNumbers.splice(numberExist, 1);
-      
+      selectedNumbers.splice(numberExist, 1); 
     }
   };
 
@@ -87,7 +85,7 @@
     while (selectedNumbers.indexOf(num.toString()) >= 0) {
       num = Math.ceil(Math.random() * max); 
     }
-    return num
+    return num;
   }
 
   // essa função ela limpa o jogo.
@@ -99,21 +97,23 @@
   }
 
   function addGameToCart() {
-    let $gameToCart = window.DOM('[data-js="cart-carrinho"]').get().children;
-
-    console.log('o que é:', $gameToCart);
-  }
-
-  function addToCart() {
-    let numberCart = selectedNumbers;
-    
-    numberCart.sort((a, b) => {
+    selectedNumbers.sort((a, b) => {
       return a - b;
     });
     
-    console.log(numberCart)
-    numberCart.push(this.id);
-    addGameToCart()
+  }
+
+  function addToCart() {
+      let $cart = window.DOM('[data-js="cart-carrinho"]').get()
+      addGameToCart()
+      $cart.textContent = selectedNumbers
+
+        let $cartGame = document.createElement('div');
+        $cartGame.color = jogoSelecionado.color;
+        $cartGame.className = jogoSelecionado.type;
+        $cartGame.price = jogoSelecionado.price;
+        $cartGame.addEventListener('click', $cart);  
+        $cart.appendChild($cartGame);    
   }
 
   // essa função é a descrição de cada jogo.
@@ -137,8 +137,7 @@
       $buttonBoll.type = 'button';
       $buttonBoll.textContent = i;
       $buttonBoll.addEventListener('click', clickButton);
-      $bollGame.appendChild($buttonBoll);
-      
+      $bollGame.appendChild($buttonBoll);  
     }
   }
 
