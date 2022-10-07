@@ -14,7 +14,7 @@
           <div class="text_Home">Home</div>
           <div class="text_Account">Account</div>
           <div class="text_Log_out">Log out</div>
-          <img class="img_seta_log_out" src="assets/img/1.png" alt="imagem de uma seta" style="float:left;width:20px ">
+          <img class="img_seta_log_out" src="/img/1.png" alt="imagem de uma seta" style="float:left;width:20px ">
         </header>
        
 
@@ -42,15 +42,23 @@
             <button class="button_complete_game" type="button" value="Complete game" data-js="complete-game">Complete game</button>
             <button class="button_clear_game" type="button" value="Clear game" data-js="clear-game">Clear game</button>
             <button class="button_Addtocart" type="button" value="Add to cart" data-js="add-to-cart"> 
-              <img src="assets/img/shopping_cart.png" style="float:left;width:35px "/>
+              <img src="/img/shopping_cart.png" style="float:left;width:35px "/>
             Add to cart</button>
           </div>
           
         </div>
 
-        <div class="retangulo_cart" data-js="cart-carrinho">
+        <div class="retangulo_cart">
           <h2 class="cart">CART</h2>
-          <p class="valor_total">Valor Total: <span data-js="valor"></span></p>
+
+          <div class="container-games">
+            <div class="view-games"> <div data-js="cart-carrinho"></div>   
+          </div>
+  
+          <p class="valor_total"><strong>CART</strong>  TOTAL:<span data-js="valor"></span></p>
+          
+          <div class="retangulo_save"></div>
+          <div class="save_cart">Save</div>
         </div>
 
         <!-- <div class="container_cart" id="container cart">

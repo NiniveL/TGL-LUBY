@@ -104,16 +104,76 @@
   }
 
   function addToCart() {
-      let $cart = window.DOM('[data-js="cart-carrinho"]').get()
-      addGameToCart()
-      $cart.textContent = selectedNumbers
 
-        let $cartGame = document.createElement('div');
-        $cartGame.color = jogoSelecionado.color;
-        $cartGame.className = jogoSelecionado.type;
-        $cartGame.price = jogoSelecionado.price;
-        $cartGame.addEventListener('click', $cart);  
-        $cart.appendChild($cartGame);    
+    let $cart = window.DOM('[data-js="cart-carrinho"]').get()
+    addGameToCart()
+
+    let valorLoto = Number(2.50);
+    let valorMega = Number(4.50);
+    let valorQuina = Number(4.00);
+    let $cartGame = document.createElement('div');
+    let $dataGame = document.createElement('div');
+    let title = doc.createElement('h3')
+    let $imgTrash = document.createElement('img');
+
+    if (jogoSelecionado.type === 'Lotofácil') {
+
+      title.innerHTML += jogoSelecionado.type
+      title.style.color = '#7F3992';
+      title.innerHTML += ` R$: ${valorLoto}`
+
+    } else if (jogoSelecionado.type === 'Mega-Sena') {
+
+      title.innerHTML = jogoSelecionado.type
+      title.style.color = '#01AC66';
+      title.innerHTML += ` R$: ${valorMega}`
+
+    } else if (jogoSelecionado.type === 'Quina') {
+
+      title.innerHTML = jogoSelecionado.type
+      title.style.color = '#F79C31';
+      title.innerHTML += ` R$: ${valorQuina}`
+
+    }
+      
+    $imgTrash.style.width = '20px'
+    $imgTrash.style.height = '24px'
+    $imgTrash.src = 'img/trash_gray.png'
+
+    $imgTrash.onclick = function () {
+      $cartGame.remove();
+      $dataGame.remove();
+      $imgTrash.remove();
+      title.remove();
+      alert('Jogo excluido com sucesso!')
+    }
+
+    $dataGame.style.width = '317px';
+    $dataGame.style.height = '50px';
+    $dataGame.style.background = '#FFFFFF'
+    $dataGame.style.marginTop = '0px'
+    $dataGame.style.alignItems = 'center';
+    $dataGame.style.justifyContent = 'center';
+
+    $cartGame.style.alignItems = 'center';
+    $cartGame.style.flexDirection = 'row-reverse'
+    $cartGame.style.justifyContent = 'space-between';
+    $cartGame.style.margin = '20px';
+    $cartGame.style.marginTop = '20px';
+    $cartGame.style.display = 'flex';
+    $cartGame.textContent = selectedNumbers;
+
+    if (!$cartGame.textContent) {
+      alert('Erro, selecione os números')
+    } else {
+      $cart.appendChild($dataGame);
+      $cartGame.addEventListener('click', $cart);
+      $dataGame.appendChild($cartGame);
+      $dataGame.appendChild(title);
+      $cartGame.appendChild($imgTrash)
+   
+    }
+
   }
 
   // essa função é a descrição de cada jogo.

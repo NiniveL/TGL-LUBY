@@ -257,7 +257,7 @@ header {
   opacity: 1;
 }
 
-.retangulo_cart { 
+/* .retangulo_cart { 
   width: 317px;
   height: 484px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -267,7 +267,6 @@ header {
 }
 
 .cart {
-  
   margin-top: 50px;
   margin-left: 50px;
   text-align: left;
@@ -284,6 +283,7 @@ header {
 }
 
 .retangulo_LOTO {
+  border-left: #7F3992;
   margin-top: 20px;
   margin-left: 50px;
   width: 4px;
@@ -317,7 +317,7 @@ header {
   opacity: 1
 }
 
-.valor_loto {
+/* .valor_loto {
   margin-top: -24px;
   margin-left: 135px;
   width: 55px;
@@ -327,14 +327,14 @@ header {
   letter-spacing: 0px;
   color: #868686;
   opacity: 1;
-}
+} */
 
-.img_lixeira1 {
+/* .img_lixeira1 {
   margin-top: 75px;
   margin-left: 15px;
-}
+} */ 
 
-.retangulo_MEGA {
+/* .retangulo_MEGA {
   margin-top: 55px;
   margin-left: 50px;
   width: 4px;
@@ -342,20 +342,11 @@ header {
   background: #01AC66 0% 0% no-repeat padding-box;
   border-radius: 100px 0px 0px 100px;
   opacity: 1;
-}
+} */
 
-.numbers_mega {
-  margin-top: -50px;
-  margin-left: 67px;
-  height: 15px;
-  text-align: left;
-  font: italic normal bold 15px/10px Helvetica Neue;
-  letter-spacing: 0px;
-  color: #868686;
-  opacity: 1;
-}
 
-.mega_cart {
+
+/* .mega_cart {
   margin-left: 60px;
   width: 88px;
   height: 19px;
@@ -364,22 +355,48 @@ header {
   letter-spacing: 0px;
   color: #01AC66;
   opacity: 1;
+} */
+
+.retangulo_cart { 
+  width: 317px;
+  height: 484px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #E2E2E2;
+  border-radius: 10px;
+  opacity: 1;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
 }
 
-.valor_mega {
-  margin-top: -8px;
-  margin-left: 155px;
-  width: 55px;
-  height: 18px;
-  text-align: left;
-  font: normal normal normal 16px/5px Helvetica Neue;
-  letter-spacing: 0px;
-  color: #868686;
-  opacity: 1;
+.container-games{
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  flex-direction: column;
 }
+
+.view-games{
+  width: 100%;
+  height: 180px;
+  box-sizing: border-box;
+}
+.cart {
+  display: flex;
+  margin-top: 30px;
+  margin-left: 1px;
+  font: italic normal bold 24px/40px Helvetica Neue;
+  letter-spacing: 0px;
+  color: #707070;
+  text-transform: uppercase;
+}
+
+
 
 .valor_total {
-  margin-top: 200px;
+  margin-top: 0px;
   margin-left: 50px;
   width: 240px;
   text-align: left;
@@ -393,7 +410,7 @@ header {
 .retangulo_save {
   padding-block-end: 10%;
   
-  margin-top: 190px;
+  margin-top: -40px;
   width: 317px;
   height: 96px;
   background: #F4F4F4 0% 0% no-repeat padding-box;
