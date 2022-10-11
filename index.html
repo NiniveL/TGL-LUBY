@@ -8,15 +8,16 @@
   </head>
     <body id="page-home">
 
-        <header>
-          <div class="text_TGL">TGL</div>
-          <div class="retangulo_TGL"></div>
-          <div class="text_Home">Home</div>
-          <div class="text_Account">Account</div>
-          <div class="text_Log_out">Log out</div>
-          <img class="img_seta_log_out" src="/img/1.png" alt="imagem de uma seta" style="float:left;width:20px ">
-        </header>
-       
+      <header class="style-header">
+        <div class="text_TGL">TGL</div>
+        <div class="retangulo_TGL"></div>
+        <div class="text_Home">Home</div>
+        <div class="text_Account">Account</div>
+        <div class="text_Log_out">Log out</div>
+        <img class="img_seta_log_out" src="/img/1.png" alt="imagem de uma seta" style="float:left;width:20px ">
+      
+      </header>
+     <hr> 
 
       <div class="container_content">
         
@@ -48,6 +49,7 @@
           
         </div>
 
+       
         <div class="retangulo_cart">
           <h2 class="cart">CART</h2>
 
@@ -55,10 +57,12 @@
             <div class="view-games"> <div data-js="cart-carrinho"></div>   
           </div>
   
-          <p class="valor_total"><strong>CART</strong>  TOTAL:<span data-js="valor"></span></p>
+          <p class="valor_total"><strong>CART</strong> TOTAL: <span data-js="cart-valor"></span></p>
           
-          <div class="retangulo_save"></div>
-          <div class="save_cart">Save</div>
+          <div class="retangulo_save">
+            <button class="save_cart">Save <img src="/img/arrow_right_green.png" class="img_seta_save"/></button>
+          </div>
+          
         </div>
 
         <!-- <div class="container_cart" id="container cart">

@@ -99,8 +99,7 @@
   function addGameToCart() {
     selectedNumbers.sort((a, b) => {
       return a - b;
-    });
-    
+    });  
   }
 
   function addToCart() {
@@ -110,32 +109,69 @@
 
     let valorLoto = Number(2.50);
     let valorMega = Number(4.50);
-    let valorQuina = Number(4.00);
+    let valorQuina = Number(2.00);
     let $cartGame = document.createElement('div');
     let $dataGame = document.createElement('div');
+    let numberAndName = document.createElement('div');
+    let containerValueAndNumber = document.createElement('div');
+    let number = document.createElement('h4')
     let title = doc.createElement('h3')
     let $imgTrash = document.createElement('img');
+    let $separatorColor = document.createElement('div')
+    let valueGame = document.createElement('h4')
+
+    valueGame.style.fontFamily = "roboto";
+    valueGame.style.color = 'grey'
+    valueGame.style.marginRight = '20px';
+   
+    title.style.marginRight = '20px';
+    title.style.fontFamily = "Arial Black";
+    title.style.fontStyle = " italic";
+    title.style.fontWeight = "900";
+    title.style.fontSize = "15px";
+   
 
     if (jogoSelecionado.type === 'Lotofácil') {
 
       title.innerHTML += jogoSelecionado.type
       title.style.color = '#7F3992';
-      title.innerHTML += ` R$: ${valorLoto}`
+      valueGame.innerHTML += ` R$: ${valorLoto}`
+      $separatorColor.style.backgroundColor = '#7F3992';
 
     } else if (jogoSelecionado.type === 'Mega-Sena') {
 
       title.innerHTML = jogoSelecionado.type
       title.style.color = '#01AC66';
-      title.innerHTML += ` R$: ${valorMega}`
+      valueGame.innerHTML += ` R$: ${valorMega}`
+      $separatorColor.style.backgroundColor = '#01AC66';
 
     } else if (jogoSelecionado.type === 'Quina') {
 
       title.innerHTML = jogoSelecionado.type
       title.style.color = '#F79C31';
-      title.innerHTML += ` R$: ${valorQuina}`
-
+      valueGame.innerHTML += ` R$: ${valorQuina}`
+      $separatorColor.style.backgroundColor = '#F79C31';
     }
-      
+
+    $separatorColor.style.width = '15px'
+    $separatorColor.style.height = '80px'
+    $separatorColor.style.borderTopLeftRadius = '10px'
+    $separatorColor.style.borderBottomLeftRadius = '10px'
+
+    numberAndName.style.width = '50px'
+    numberAndName.style.height = '70px'
+    numberAndName.style.alignItems = 'center'
+    numberAndName.style.display = 'flex'
+    numberAndName.style.justifyContent = 'center'
+        
+    containerValueAndNumber.style.width = '190px';
+    containerValueAndNumber.style.height = '40px';
+    containerValueAndNumber.style.display = 'flex';
+    containerValueAndNumber.style.flexDirection = 'row';
+    containerValueAndNumber.style.alignItems =  'center';
+    containerValueAndNumber.style.justifyContent = "flex-start";
+
+    
     $imgTrash.style.width = '20px'
     $imgTrash.style.height = '24px'
     $imgTrash.src = 'img/trash_gray.png'
@@ -148,31 +184,52 @@
       alert('Jogo excluido com sucesso!')
     }
 
-    $dataGame.style.width = '317px';
-    $dataGame.style.height = '50px';
-    $dataGame.style.background = '#FFFFFF'
-    $dataGame.style.marginTop = '0px'
+    $dataGame.style.width = '290px';
+    $dataGame.style.height = '70px';
     $dataGame.style.alignItems = 'center';
     $dataGame.style.justifyContent = 'center';
+    $dataGame.style.flexDirection = 'row'
+    $dataGame.style.marginTop = '40px';
+    $dataGame.style.display = 'flex'
 
-    $cartGame.style.alignItems = 'center';
-    $cartGame.style.flexDirection = 'row-reverse'
-    $cartGame.style.justifyContent = 'space-between';
-    $cartGame.style.margin = '20px';
-    $cartGame.style.marginTop = '20px';
-    $cartGame.style.display = 'flex';
-    $cartGame.textContent = selectedNumbers;
+    $cartGame.style.alignItems = 'flex-start';
+    $cartGame.style.justifyContent = 'center';
+    $cartGame.style.margin = '0px';
+    $cartGame.style.marginTop = '0px';
+    $cartGame.style.width = '100%'
+    $cartGame.style.display = 'flex'
+    $cartGame.style.flexDirection = 'column'
+    $cartGame.style.height = '70px'
+    $cartGame.style.padding = '10px'
 
-    if (!$cartGame.textContent) {
+
+    number.textContent = selectedNumbers;
+    number.style.color = 'grey'
+    number.style.fontFamily = "roboto";
+    number.style.width = '240px'
+    number.style.fontSize = "15px";
+
+    if (!number.textContent) {
       alert('Erro, selecione os números')
     } else {
       $cart.appendChild($dataGame);
-      $cartGame.addEventListener('click', $cart);
+
+      $dataGame.appendChild(numberAndName)
+      $dataGame.appendChild($separatorColor)
       $dataGame.appendChild($cartGame);
-      $dataGame.appendChild(title);
-      $cartGame.appendChild($imgTrash)
-   
+      $cartGame.appendChild(number);
+      $cartGame.appendChild(containerValueAndNumber)
+      containerValueAndNumber.appendChild(title);
+      containerValueAndNumber.appendChild(valueGame); 
+      numberAndName.appendChild($imgTrash)
+      $dataGame.addEventListener('click', $cart);
     }
+    valueTotal()
+  }
+
+  function valueTotal() {
+    let cartTotal = window.DOM('[data-js="cart-valor"]').get()
+    cartTotal.textContent = +jogoSelecionado.price
 
   }
 
