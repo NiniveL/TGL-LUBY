@@ -51,6 +51,7 @@
     
     if (numberExist == -1) {
       if (selectedAmount > maxNumbers -1) {
+        alert('maximum number of balls selected')
         return false;
       }
       button.style.border = `2px solid.color(${jogoSelecionado.color})`;
@@ -113,7 +114,7 @@
     let valorQuina = Number(2.00);
     let $cartGame = document.createElement('div');
     let $dataGame = document.createElement('div');
-    let numberAndName = document.createElement('div');
+    let containeTrash = document.createElement('div');
     let containerValueAndNumber = document.createElement('div');
     let number = document.createElement('h4')
     let title = doc.createElement('h3')
@@ -158,11 +159,11 @@
     $separatorColor.style.borderTopLeftRadius = '10px'
     $separatorColor.style.borderBottomLeftRadius = '10px'
 
-    numberAndName.style.width = '50px'
-    numberAndName.style.height = '70px'
-    numberAndName.style.alignItems = 'center'
-    numberAndName.style.display = 'flex'
-    numberAndName.style.justifyContent = 'center'
+    containeTrash.style.width = '50px'
+    containeTrash.style.height = '70px'
+    containeTrash.style.alignItems = 'center'
+    containeTrash.style.display = 'flex'
+    containeTrash.style.justifyContent = 'center'
         
     containerValueAndNumber.style.width = '190px';
     containerValueAndNumber.style.height = '40px';
@@ -177,14 +178,12 @@
     $imgTrash.id = jogoSelecionado.price
 
     $imgTrash.onclick = function () {
-      let cartTotal = window.DOM('[data-js="cart-valor"]').get()
-      cartTotal.textContent = currencyFormate(sumGames) 
       $cartGame.remove();
       $dataGame.remove();
       $imgTrash.remove();
       title.remove();
       sumGames -= this.id
-      console.log(sumGames);
+      remuveCart();
     }
 
     $dataGame.style.width = '290px';
@@ -215,14 +214,14 @@
       alert('Erro, selecione os números')
     } else {
       $cart.appendChild($dataGame);
-      $dataGame.appendChild(numberAndName)
+      $dataGame.appendChild(containeTrash)
       $dataGame.appendChild($separatorColor)
       $dataGame.appendChild($cartGame);
       $cartGame.appendChild(number);
       $cartGame.appendChild(containerValueAndNumber)
       containerValueAndNumber.appendChild(title);
       containerValueAndNumber.appendChild(valueGame); 
-      numberAndName.appendChild($imgTrash)
+      containeTrash.appendChild($imgTrash)
       $dataGame.addEventListener('click', $cart);
     }
     valueTotal()
@@ -231,15 +230,22 @@
   // essa função ela trás os valores dos jogos e faz a soma de cada Jogo adicionado ao cart
   function valueTotal() {
     let cartTotal = window.DOM('[data-js="cart-valor"]').get() 
-    sumGames = sumGames + +jogoSelecionado.price
+    sumGames += jogoSelecionado.price
     cartTotal.textContent = currencyFormate(sumGames)
   }
+
   // essa função ela transforma a moeda para BRL
   function currencyFormate(price) {
     return price.toLocaleString('pt-br', {
       style: 'currency',
       currency: 'BRL',
     })
+  }
+
+  function remuveCart() {
+    let cartTotal = window.DOM('[data-js="cart-valor"]').get() 
+    cartTotal.textContent = currencyFormate(sumGames)
+    sumGames.remove()
   }
   
   // essa função é a descrição e nome de cada jogo.
