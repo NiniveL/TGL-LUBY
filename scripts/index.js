@@ -4,6 +4,7 @@
   let games;
   let selectedNumbers = [];
   let gameButtons;
+  let sumGames = 0;
 
 
   function initTogetherPage() {
@@ -66,7 +67,7 @@
     let $bolls = window.DOM('[data-js="boll-games"]').get().children;
     let bollsArray = Array.from($bolls)
     const emptyNumbers = jogoSelecionado.min_and_max_number - selectedNumbers.length
-
+    
     this.style["background-color"] = jogoSelecionado.color;
     this.style["color"] = 'white';
     
@@ -74,7 +75,7 @@
       const existNumbers = randomNumbers(jogoSelecionado.range);
       const $boll = bollsArray.find(value => { 
         return +value.id === existNumbers
-      })
+      });
       clickButton($boll)  
     }
   } 
@@ -95,15 +96,15 @@
     selectedNumbers = [];
     createBoll()
   }
-
+  
   function addGameToCart() {
     selectedNumbers.sort((a, b) => {
-      return a - b;
-    });  
+      return a -= b;
+    });    
   }
 
+  // essa função ela adiciona os jogos no cart
   function addToCart() {
-
     let $cart = window.DOM('[data-js="cart-carrinho"]').get()
     addGameToCart()
 
@@ -130,7 +131,6 @@
     title.style.fontWeight = "900";
     title.style.fontSize = "15px";
    
-
     if (jogoSelecionado.type === 'Lotofácil') {
 
       title.innerHTML += jogoSelecionado.type
@@ -171,17 +171,20 @@
     containerValueAndNumber.style.alignItems =  'center';
     containerValueAndNumber.style.justifyContent = "flex-start";
 
-    
     $imgTrash.style.width = '20px'
     $imgTrash.style.height = '24px'
     $imgTrash.src = 'img/trash_gray.png'
+    $imgTrash.id = jogoSelecionado.price
 
     $imgTrash.onclick = function () {
+      let cartTotal = window.DOM('[data-js="cart-valor"]').get()
+      cartTotal.textContent = currencyFormate(sumGames) 
       $cartGame.remove();
       $dataGame.remove();
       $imgTrash.remove();
       title.remove();
-      alert('Jogo excluido com sucesso!')
+      sumGames -= this.id
+      console.log(sumGames);
     }
 
     $dataGame.style.width = '290px';
@@ -202,7 +205,6 @@
     $cartGame.style.height = '70px'
     $cartGame.style.padding = '10px'
 
-
     number.textContent = selectedNumbers;
     number.style.color = 'grey'
     number.style.fontFamily = "roboto";
@@ -213,7 +215,6 @@
       alert('Erro, selecione os números')
     } else {
       $cart.appendChild($dataGame);
-
       $dataGame.appendChild(numberAndName)
       $dataGame.appendChild($separatorColor)
       $dataGame.appendChild($cartGame);
@@ -227,13 +228,21 @@
     valueTotal()
   }
 
+  // essa função ela trás os valores dos jogos e faz a soma de cada Jogo adicionado ao cart
   function valueTotal() {
-    let cartTotal = window.DOM('[data-js="cart-valor"]').get()
-    cartTotal.textContent = +jogoSelecionado.price
-
+    let cartTotal = window.DOM('[data-js="cart-valor"]').get() 
+    sumGames = sumGames + +jogoSelecionado.price
+    cartTotal.textContent = currencyFormate(sumGames)
   }
-
-  // essa função é a descrição de cada jogo.
+  // essa função ela transforma a moeda para BRL
+  function currencyFormate(price) {
+    return price.toLocaleString('pt-br', {
+      style: 'currency',
+      currency: 'BRL',
+    })
+  }
+  
+  // essa função é a descrição e nome de cada jogo.
   function createGame() {
     let $nomeDoJogo = window.DOM('[data-js="nome-do-jogo"]').get();
     let $descricaoDoJogo = window.DOM('[data-js="descricao-do-jogo"]').get();
@@ -257,13 +266,12 @@
       $bollGame.appendChild($buttonBoll);  
     }
   }
-
+  
   function initButtonEvent() {
     doc.querySelector('[data-js="complete-game"]').addEventListener('click', completGame);
     doc.querySelector('[data-js="clear-game"]').addEventListener('click', cleanGame);
     doc.querySelector('[data-js="add-to-cart"]').addEventListener('click', addToCart);
   }
-
 
   // essa função esta fazendo mudar de um jogo para outro, lotofacil, mega e Quina
   function initGamesButton() {
