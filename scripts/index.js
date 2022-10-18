@@ -31,7 +31,6 @@
       let $buttonsContainer = window.DOM('[data-js="buttons-game"]').get();
       let $buttonGame = document.createElement('button');
       $buttonGame.className = games.type;
-      console.log($buttonGame.className )
       $buttonGame.id = index;
       $buttonGame.style = app.color;
       $buttonGame.textContent = games.type;
@@ -52,7 +51,7 @@
       button.style.backgroundColor = 'white';
       button.style.color = gameColor;
     }))
-
+    
     this.style["background-color"] = app.color;
     this.style["color"] = 'white';
     createGame();
@@ -122,10 +121,11 @@
 
   // essa função ela adiciona os jogos no cart
   function addToCart() {
+    console.log();
     let $cart = window.DOM('[data-js="cart-carrinho"]').get()
     let text = window.DOM('[data-js="remove-text"]').get()
     addGameToCart()
-
+    
     let $cartGame = document.createElement('div');
     let $dataGame = document.createElement('div');
     let containeTrash = document.createElement('div');
@@ -141,14 +141,12 @@
     valueGame.style.color = '#868686'
     valueGame.style.marginRight = '16px';
     
-   
     title.style.marginRight = '20px';
     title.style.fontFamily = 'IBM Plex Sans';
     title.style.fontStyle = " italic";
     title.style.fontWeight = "600";
     title.style.fontSize = "17px";
     
-    // corrigir para mudar de modo estatico para ultilizar o json
     if (app.type !== app.price) {
 
       title.innerHTML += app.type
@@ -211,13 +209,11 @@
     $dataGame.style.marginTop = '40px';
     $dataGame.style.display = 'flex'
     
-    
     $cartGame.style.justifyContent = 'center';
     $cartGame.style.width = '150%';
     $cartGame.style.padding = '10px';
     $cartGame.style.flexWrap = 'wrap';
    
-    
     number.textContent = selectedNumbers;
     number.style.color = '#868686';
     number.style.fontFamily = 'IBM Plex Sans';
@@ -241,6 +237,7 @@
       $dataGame.addEventListener('click', $cart);
       valueTotal()
       text.remove();
+      
     }
     
   }
@@ -250,7 +247,6 @@
     let cartTotal = window.DOM('[data-js="cart-valor"]').get() 
     sumGames += app.price
     cartTotal.textContent = currencyFormate(sumGames)
-   
   }
 
   // essa função ela transforma a moeda para BRL

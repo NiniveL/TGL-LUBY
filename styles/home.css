@@ -416,4 +416,11 @@ header {
   text-align: center;
 }
 
+.text-carrinho {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 35px;
+  color: #707070;
+}
+
 
