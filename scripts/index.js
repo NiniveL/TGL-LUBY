@@ -1,11 +1,10 @@
-(($, doc) => {
+((_$, doc) => {
   "use strict";
-  let jogoSelecionado;
+  let app;
   let games;
   let selectedNumbers = [];
   let gameButtons;
   let sumGames = 0;
-
 
   function initTogetherPage() {
     readyFileGamesJson();
@@ -19,25 +18,42 @@
     ajax.addEventListener('readystatechange', function () {
       if (ajax.readyState === 4) {
         games = JSON.parse(ajax.responseText);
-        jogoSelecionado = games.types[0];
+        app = games.types[0];
         createGame();
         initGamesButton();   
       };
     });
   };
 
-  // essa função ela muda o jogo e coloca a cor do jogo selecionado
-  function mudarJogo() {
-    jogoSelecionado = games.types[this.id];
-    selectedNumbers = [];
+   // essa função esta fazendo mudar de um jogo para outro, lotofacil, mega e Quina
+   function initGamesButton() {
+    games.types.forEach((games, index) => {
+      let $buttonsContainer = window.DOM('[data-js="buttons-game"]').get();
+      let $buttonGame = document.createElement('button');
+      $buttonGame.className = games.type;
+      console.log($buttonGame.className )
+      $buttonGame.id = index;
+      $buttonGame.style = app.color;
+      $buttonGame.textContent = games.type;
+      $buttonGame.setAttribute("data-js", "games");
+      $buttonGame.addEventListener('click', changeGame);
+      $buttonsContainer.appendChild($buttonGame);
+    
+    })
+    gameButtons = Array.from(document.querySelectorAll('[data-js="games"]')); 
+  };
 
+  // essa função ela muda o jogo e coloca a cor do jogo selecionado
+  function changeGame() {
+    app = games.types[this.id];
+    selectedNumbers = [];
     gameButtons.forEach((button => {
       const gameColor = games.types.find(type => type.type === button.className).color;
       button.style.backgroundColor = 'white';
       button.style.color = gameColor;
     }))
 
-    this.style["background-color"] = jogoSelecionado.color;
+    this.style["background-color"] = app.color;
     this.style["color"] = 'white';
     createGame();
   };
@@ -46,7 +62,7 @@
   function clickButton(param) {
     const button = this ? this : param
     const selectedAmount = selectedNumbers.length;
-    const maxNumbers = jogoSelecionado.min_and_max_number;
+    const maxNumbers = app.min_and_max_number;
     const numberExist = selectedNumbers.findIndex(item =>  item === button.id)
     
     if (numberExist == -1) {
@@ -54,8 +70,8 @@
         alert('maximum number of balls selected')
         return false;
       }
-      button.style.border = `2px solid.color(${jogoSelecionado.color})`;
-      button.style["background-color"] = jogoSelecionado.color;
+      button.style.border = `2px solid.color(${app.color})`;
+      button.style["background-color"] = app.color;
       selectedNumbers.push(button.id);
     } else{
       button.style["background-color"] = '#ADC0C4'
@@ -67,13 +83,13 @@
   function completGame() {
     let $bolls = window.DOM('[data-js="boll-games"]').get().children;
     let bollsArray = Array.from($bolls)
-    const emptyNumbers = jogoSelecionado.min_and_max_number - selectedNumbers.length
+    const emptyNumbers = app.min_and_max_number - selectedNumbers.length
     
-    this.style["background-color"] = jogoSelecionado.color;
+    this.style["background-color"] = app.color;
     this.style["color"] = 'white';
     
     for (let i = 0; i < emptyNumbers; i++) {
-      const existNumbers = randomNumbers(jogoSelecionado.range);
+      const existNumbers = randomNumbers(app.range);
       const $boll = bollsArray.find(value => { 
         return +value.id === existNumbers
       });
@@ -92,7 +108,7 @@
 
   // essa função ela limpa o jogo.
   function cleanGame() {
-    this.style["background-color"] = jogoSelecionado.color;
+    this.style["background-color"] = app.color;
     this.style["color"] = 'white';
     selectedNumbers = [];
     createBoll()
@@ -107,11 +123,9 @@
   // essa função ela adiciona os jogos no cart
   function addToCart() {
     let $cart = window.DOM('[data-js="cart-carrinho"]').get()
+    let text = window.DOM('[data-js="remove-text"]').get()
     addGameToCart()
 
-    let valorLoto = Number(2.50);
-    let valorMega = Number(4.50);
-    let valorQuina = Number(2.00);
     let $cartGame = document.createElement('div');
     let $dataGame = document.createElement('div');
     let containeTrash = document.createElement('div');
@@ -122,60 +136,65 @@
     let $separatorColor = document.createElement('div')
     let valueGame = document.createElement('h4')
 
-    valueGame.style.fontFamily = "roboto";
-    valueGame.style.color = 'grey'
-    valueGame.style.marginRight = '20px';
+    valueGame.style.fontFamily = 'IBM Plex Sans';
+    valueGame.style.fontWeight = "600";
+    valueGame.style.color = '#868686'
+    valueGame.style.marginRight = '16px';
+    
    
     title.style.marginRight = '20px';
-    title.style.fontFamily = "Arial Black";
+    title.style.fontFamily = 'IBM Plex Sans';
     title.style.fontStyle = " italic";
-    title.style.fontWeight = "900";
-    title.style.fontSize = "15px";
-   
-    if (jogoSelecionado.type === 'Lotofácil') {
+    title.style.fontWeight = "600";
+    title.style.fontSize = "17px";
+    
+    // corrigir para mudar de modo estatico para ultilizar o json
+    if (app.type !== app.price) {
 
-      title.innerHTML += jogoSelecionado.type
-      title.style.color = '#7F3992';
-      valueGame.innerHTML += ` R$: ${valorLoto}`
-      $separatorColor.style.backgroundColor = '#7F3992';
+      title.innerHTML += app.type
+      title.style.color = app.color;
+      valueGame.innerHTML += app.price;
+      $separatorColor.style.backgroundColor = app.color;
 
-    } else if (jogoSelecionado.type === 'Mega-Sena') {
+    } else if (app.type === app.price) {
 
-      title.innerHTML = jogoSelecionado.type
-      title.style.color = '#01AC66';
-      valueGame.innerHTML += ` R$: ${valorMega}`
-      $separatorColor.style.backgroundColor = '#01AC66';
+      title.innerHTML = app.type
+      title.style.color = app.color;
+      valueGame.innerHTML += app.price;
+      $separatorColor.style.backgroundColor = app.color;
 
-    } else if (jogoSelecionado.type === 'Quina') {
+    } else if (app.type === app.price) {
 
-      title.innerHTML = jogoSelecionado.type
-      title.style.color = '#F79C31';
-      valueGame.innerHTML += ` R$: ${valorQuina}`
-      $separatorColor.style.backgroundColor = '#F79C31';
+      title.innerHTML = app.type
+      title.style.color = app.color;
+      valueGame.innerHTML += app.price;
+      $separatorColor.style.backgroundColor = app.color;
     }
 
-    $separatorColor.style.width = '15px'
+    else if (app.type === app.price) {
+
+      title.innerHTML = app.type
+      title.style.color = app.color;
+      valueGame.innerHTML += app.price;
+      $separatorColor.style.backgroundColor = app.color;
+    }
+
+    $separatorColor.style.marginLeft = '7px'
+    $separatorColor.style.width = '7px'
     $separatorColor.style.height = '80px'
     $separatorColor.style.borderTopLeftRadius = '10px'
     $separatorColor.style.borderBottomLeftRadius = '10px'
-
-    containeTrash.style.width = '50px'
-    containeTrash.style.height = '70px'
-    containeTrash.style.alignItems = 'center'
-    containeTrash.style.display = 'flex'
-    containeTrash.style.justifyContent = 'center'
-        
+      
     containerValueAndNumber.style.width = '190px';
     containerValueAndNumber.style.height = '40px';
     containerValueAndNumber.style.display = 'flex';
-    containerValueAndNumber.style.flexDirection = 'row';
+    containerValueAndNumber.style.marginTop = '-15px';
     containerValueAndNumber.style.alignItems =  'center';
-    containerValueAndNumber.style.justifyContent = "flex-start";
 
     $imgTrash.style.width = '20px'
     $imgTrash.style.height = '24px'
     $imgTrash.src = 'img/trash_gray.png'
-    $imgTrash.id = jogoSelecionado.price
+    $imgTrash.id = app.price
 
     $imgTrash.onclick = function () {
       $cartGame.remove();
@@ -189,27 +208,24 @@
     $dataGame.style.width = '290px';
     $dataGame.style.height = '70px';
     $dataGame.style.alignItems = 'center';
-    $dataGame.style.justifyContent = 'center';
-    $dataGame.style.flexDirection = 'row'
     $dataGame.style.marginTop = '40px';
     $dataGame.style.display = 'flex'
-
-    $cartGame.style.alignItems = 'flex-start';
+    
+    
     $cartGame.style.justifyContent = 'center';
-    $cartGame.style.margin = '0px';
-    $cartGame.style.marginTop = '0px';
-    $cartGame.style.width = '100%'
-    $cartGame.style.display = 'flex'
-    $cartGame.style.flexDirection = 'column'
-    $cartGame.style.height = '70px'
-    $cartGame.style.padding = '10px'
-
+    $cartGame.style.width = '150%';
+    $cartGame.style.padding = '10px';
+    $cartGame.style.flexWrap = 'wrap';
+   
+    
     number.textContent = selectedNumbers;
-    number.style.color = 'grey'
-    number.style.fontFamily = "roboto";
-    number.style.width = '240px'
-    number.style.fontSize = "15px";
-
+    number.style.color = '#868686';
+    number.style.fontFamily = 'IBM Plex Sans';
+    number.style.fontStyle = " italic";
+    number.style.width = '20px';
+    number.style.fontSize = "17px";
+    
+    
     if (!number.textContent) {
       alert('Erro, selecione os números')
     } else {
@@ -223,15 +239,18 @@
       containerValueAndNumber.appendChild(valueGame); 
       containeTrash.appendChild($imgTrash)
       $dataGame.addEventListener('click', $cart);
+      valueTotal()
+      text.remove();
     }
-    valueTotal()
+    
   }
 
   // essa função ela trás os valores dos jogos e faz a soma de cada Jogo adicionado ao cart
   function valueTotal() {
     let cartTotal = window.DOM('[data-js="cart-valor"]').get() 
-    sumGames += jogoSelecionado.price
+    sumGames += app.price
     cartTotal.textContent = currencyFormate(sumGames)
+   
   }
 
   // essa função ela transforma a moeda para BRL
@@ -242,6 +261,7 @@
     })
   }
 
+  // essa função ela remove o valor do jogo quando o jogo também é removido
   function remuveCart() {
     let cartTotal = window.DOM('[data-js="cart-valor"]').get() 
     cartTotal.textContent = currencyFormate(sumGames)
@@ -252,8 +272,8 @@
   function createGame() {
     let $nomeDoJogo = window.DOM('[data-js="nome-do-jogo"]').get();
     let $descricaoDoJogo = window.DOM('[data-js="descricao-do-jogo"]').get();
-    $nomeDoJogo.textContent = jogoSelecionado.type;
-    $descricaoDoJogo.textContent = jogoSelecionado.description;
+    $nomeDoJogo.textContent = app.type;
+    $descricaoDoJogo.textContent = app.description;
     createBoll();
   };
 
@@ -262,7 +282,7 @@
     let $bollGame = window.DOM('[data-js="boll-games"]').get();
     $bollGame.textContent = ""
     
-    for (let i = 1; i <= jogoSelecionado.range; i++) {
+    for (let i = 1; i <= app.range; i++) {
       let $buttonBoll = document.createElement('button');
       $buttonBoll.className = 'bolas';
       $buttonBoll.id = i;
@@ -278,22 +298,6 @@
     doc.querySelector('[data-js="clear-game"]').addEventListener('click', cleanGame);
     doc.querySelector('[data-js="add-to-cart"]').addEventListener('click', addToCart);
   }
-
-  // essa função esta fazendo mudar de um jogo para outro, lotofacil, mega e Quina
-  function initGamesButton() {
-    games.types.forEach((games, index) => {
-      let $buttonsContainer = window.DOM('[data-js="buttons-game"]').get();
-
-      let $buttonGame = document.createElement('button');
-      $buttonGame.className = games.type;
-      $buttonGame.id = index;
-      $buttonGame.textContent = games.type;
-      $buttonGame.setAttribute("data-js", "games");
-      $buttonGame.addEventListener('click', mudarJogo);
-      $buttonsContainer.appendChild($buttonGame);
-    })
-    gameButtons = Array.from(document.querySelectorAll('[data-js="games"]')); 
-  };
 
   initTogetherPage()
 })(window, document)

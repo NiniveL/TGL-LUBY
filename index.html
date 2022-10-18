@@ -4,6 +4,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>TGL LUBY</title>
+      <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700,700i" rel="stylesheet" />
       <link rel="stylesheet" href="./styles/home.css"> 
   </head>
     <body id="page-home">
@@ -22,7 +23,7 @@
       <div class="container_content">
         
         <div class="container_space_to_bet">
-            <h2 class="new_bet"><strong>NEW BET</strong> <span data-js="nome-do-jogo"></span> </h2>
+            <h2 class="new_bet"><strong>NEW BET</strong> FOR <span data-js="nome-do-jogo"></span> </h2>
             <p class="text_choose">Choose a game</p>
 
             <div  class="Games" data-js="buttons-game"></div>
@@ -50,31 +51,18 @@
         </div>
 
        
-        <div class="retangulo_cart">
+      <div class="retangulo_cart">
           <h2 class="cart">CART</h2>
 
-          <div class="container-games">
-            <div class="view-games"> <div data-js="cart-carrinho"></div>   
-          </div>
+        <div class="container-games">
+            <div class="view-games"> <div data-js="cart-carrinho"><p data-js="remove-text">Carrinho vazio</p></div></div>
   
-          <p class="valor_total"><strong>CART</strong> TOTAL: <span data-js="cart-valor"></span></p>
+            <p class="valor_total"><strong>CART </strong> TOTAL: <span data-js="cart-valor"> R$0,00 </span></p>
           
-          <div class="retangulo_save">
-            <button class="save_cart" data-js="button-save"> Save <img src="/img/arrow_right_green.png" class="img_seta_save"/></button>
-          </div>
-          
+            <div class="retangulo_save">
+              <button class="save_cart" data-js="button-save"> Save <img src="/img/arrow_right_green.png" class="img_seta_save"/></button>
+            </div> 
         </div>
-
-        <!-- <div class="container_cart" id="container cart">
-            <main class="cart1">
-                <div class="retangulo_cart"></div>
-                <h2 class="cart">CART</h2>
-                <div class="valor_total_cart"> <strong>CART</strong> TOTAL: R$ 7,00</div>
-                <div class="retangulo_save"></div>
-                <div class="save_cart">Save</div>
-                <img class="img_seta_save" src="assets/img/arrow_right_green.png" alt="imagem de uma seta" style="float:left;width: 20px ">
-            </main>
-        </div> -->
       </div>
 
       <footer class="fixarRodape">

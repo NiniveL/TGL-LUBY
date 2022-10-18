@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 html, body {
   background: #F7F7F7 0% 0% no-repeat padding-box;
   opacity: 1;
@@ -6,10 +6,12 @@ html, body {
   margin: 0; 
  
 }
+
 body > hr{
  background-color: #c0bfbf;
  width: 100vw;
 }
+
 header {
   background-color: #F7F7F7;
   width: 100%;
@@ -38,11 +40,14 @@ header {
 }
 
 .text_TGL {
-  margin-top: 15px;
+  margin-top: 16px;
   margin-left: 315px;
   width: 1139px;
   height: 0;
-  font: italic normal bold 44px/70px Helvetica Neue;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 44px;
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
@@ -53,56 +58,59 @@ header {
   margin-top: 60px;
   margin-left: 310px;
   width: 107px;
-  height: 5px;
+  height: 6px;
   background: #B5C401 0% 0% no-repeat padding-box;
   border-radius: 5px;
   opacity: 1;
 }
 
 .text_Home {
-  margin-top: -30px;
+  margin-top: -50px;
   margin-left: 520px;
   width: 10px;
   height: 180px;
   text-align: left;
-  font: italic normal bold 20px/5px Helvetica Neue;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 24px;
   letter-spacing: 0px;
   color: #707070;
   opacity: 1; 
-  font-family: 'Roboto', sans-serif;
 }
 
 .text_Log_out {
-  margin-top: 6px;
-  margin-left: 700px;
+  margin-top: -33px;
+  margin-left: 445px;
   height: 90px;
   text-align: center;
-  font: italic normal bold 20px/10px Helvetica Neue;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 24px;
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
-  font-family: 'Roboto', sans-serif;
+
 }
 
 .text_Account {
-  margin-top: -210px;
-  margin-left: 1230px;
-  top: 28px;
-  left: 944px;
-  width: 80px;
-  height: 24px;
+  margin-top: -175px;
+  margin-left: 100px;
   text-align: center;
-  font: italic normal bold 20px/70px Helvetica Neue;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 24px;
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
-  font-family: 'Roboto', sans-serif;
+  
 }
 
-
 .img_seta_log_out{
-  margin-top: -96px;
-  margin-left: 1420px; 
+  margin-top: -83px;
+  margin-left: 1370px;
 }
 
 .new_bet {
@@ -110,7 +118,10 @@ header {
   margin-left: 315px;
   width: 360px;
   height: 0px;
-  font: italic normal 300 20px/85px Helvetica Neue;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 24px;
   letter-spacing: 0px;
   color: #707070
 }
@@ -119,23 +130,27 @@ header {
   display: flex;
   margin-top: 50px;
   margin-left: 315px;
-  width: 126px;
   height: 50px;
   text-align: left;
-  font: italic normal bold 17px/70px Helvetica Neue;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 20px;
   letter-spacing: 0px;
   color: #868686;
   opacity: 1;
 }
 
-
 .Lotofácil {
   width: 113px;
   height: 34px;
   margin-left: 315px;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
+  background: #FFFFFF;
   border: 2px solid #7F3992;
-  font: italic normal bold 14px/40px Helvetica Neue;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 17px;
   color: #7F3992;
   border-radius: 100px;
   opacity: 1;
@@ -147,7 +162,10 @@ header {
   margin-left: 20px;
   border: 2px solid #01AC66;
   background: #FFFFFF 0% 0% no-repeat padding-box;
-  font: italic normal bold 14px/40px Helvetica Neue;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 17px;
   text-align: center;
   color: #01AC66;
   letter-spacing: 0px;
@@ -163,10 +181,32 @@ header {
   margin-left: 20px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   border: 2px solid #F79C31;
-  font: italic normal bold 15px/40px Helvetica Neue;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 17px;
   text-align: center;
   letter-spacing: 0px;
   color: #F79C31;
+  border-radius: 100px;
+  opacity: 1; 
+}
+
+.JogoDoBicho {
+  margin-top: 20px;
+  top: 200px;
+  width: 113px;
+  height: 34px;
+  margin-left: 20px;
+  background: #FFFFFF;
+  border: 2px solid #0b1d94;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 17px;
+  text-align: center;
+  letter-spacing: 0px;
+  color: #0b1d94;
   border-radius: 100px;
   opacity: 1; 
 }
@@ -177,6 +217,10 @@ header {
   width: 648px;
   height: 69px;
   text-align: left;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 17px;
   letter-spacing: 0px;
   color: #868686;
   opacity: 1;
@@ -184,13 +228,12 @@ header {
 
 .container_boll {
   width: 700px;
-  padding: left 10%; 
+  padding: left 5%; 
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-left: 300px;
 }
-
 
 .bolas {
   display: inline-block;
@@ -199,7 +242,7 @@ header {
   text-decoration: none;
   width: 63px;
   height: 65px;
-  background: #ADC0C4 0% 0% no-repeat padding-box;
+  background: #ADC0C4;
   font: normal normal bold 20px/65px Helvetica Neue;
   letter-spacing: 0px;
   color: #FFFFFF;
@@ -209,6 +252,8 @@ header {
 .button_container {
   width: 100%;
   height: 100%;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .button_complete_game{
@@ -219,7 +264,9 @@ header {
   border: 1px solid #27C383;
   border-radius: 10px;
   text-align: center;
-  font: normal normal medium 16px/24px Helvetica Neue;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
   letter-spacing: 0px;
   color: #27C383;
   opacity: 1;
@@ -233,7 +280,9 @@ header {
   border: 1px solid #27C383;
   border-radius: 10px;
   text-align: center;
-  font: normal normal medium 16px/24px Helvetica Neue;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
   letter-spacing: 0px;
   color: #27C383;
   opacity: 1;
@@ -249,12 +298,13 @@ header {
   border: 1px solid #27C383;
   border-radius: 10px;
   text-align: center;
-  font: normal normal bold 16px/24px Helvetica Neue;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
 }
-
 
 .retangulo_cart { 
   width: 317px;
@@ -290,31 +340,32 @@ header {
 }
 .view-games::-webkit-scrollbar{
     width: 10px;
-    border: 1px  red;
-  
+    border: 1px  red; 
 }
-.view-games::-webkit-scrollbar-thumb{
-  border-radius: 1px;
-  background-color: #e0e0e05b;
-}
+
 .cart {
-  /* display: flex; */
-  width: 225px;
+  
+  width: 300px;
   margin-top: 30px;
-  margin-left: 1px;
-  font: italic normal bold 24px/40px Helvetica Neue;
-  letter-spacing: 0px;
+  margin-left: 20px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 24px;
   color: #707070;
   text-transform: uppercase;
 }
 
 .valor_total {
+  display: inline-flex;
   margin-top: 20px;
-  margin-left: 50px;
+  margin-left: 20px;
   width: 240px;
   text-align: left;
-  letter-spacing: 0px;
-  font: normal normal 300 24px/80px Helvetica Neue;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 24px;
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
@@ -336,14 +387,14 @@ header {
   flex-direction: row;
   display: flex;
   border: none;
-  background-color: #70707000;
-  cursor: pointer;
-  margin-top: 0px;
   margin-left: 115px;
   width: 82px;
   height: 30px;
   text-align: center;
-  font: italic normal bold 25px/20px Helvetica Neue;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 35px;
   letter-spacing: 0px;
   color: #27C383;
   opacity: 1;
@@ -353,6 +404,7 @@ header {
 .img_seta_save{
   margin-left: 10px;
   height: 20px;
+  margin-top: 10px;
   text-align: center;
   opacity: 1;
 }
@@ -363,3 +415,5 @@ header {
   width: 100%;
   text-align: center;
 }
+
+
