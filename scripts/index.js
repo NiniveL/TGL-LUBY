@@ -27,25 +27,26 @@
 
    // essa função esta fazendo mudar de um jogo para outro, lotofacil, mega e Quina
    function initGamesButton() {
-    games.types.forEach((games, index) => {
-      let $buttonsContainer = window.DOM('[data-js="buttons-game"]').get();
-      let $buttonGame = document.createElement('button');
-      $buttonGame.className = games.type;
-      $buttonGame.id = index;
-      $buttonGame.style = app.color;
-      $buttonGame.textContent = games.type;
-      $buttonGame.setAttribute("data-js", "games");
-      $buttonGame.addEventListener('click', changeGame);
-      $buttonsContainer.appendChild($buttonGame);
-    
-    })
-    gameButtons = Array.from(document.querySelectorAll('[data-js="games"]')); 
+    gameButtons = app.color
+     games.types.forEach((games, index,) => {
+       let $buttonsContainer = window.DOM('[data-js="buttons-game"]').get();
+       let $buttonGame = document.createElement('button');
+       $buttonGame.className = games.type;
+       $buttonGame.id = index;
+       $buttonGame.style = app.color;
+       $buttonGame.textContent = games.type;
+       $buttonGame.setAttribute("data-js", "games");
+       $buttonGame.addEventListener('click', changeGame);
+       $buttonsContainer.appendChild($buttonGame);  
+       
+      })
+    gameButtons = Array.from(document.querySelectorAll('[data-js="games"]'));
   };
 
   // essa função ela muda o jogo e coloca a cor do jogo selecionado
   function changeGame() {
     app = games.types[this.id];
-    selectedNumbers = [];
+    selectedNumbers = []
     gameButtons.forEach((button => {
       const gameColor = games.types.find(type => type.type === button.className).color;
       button.style.backgroundColor = 'white';
@@ -59,10 +60,10 @@
 
   // essa função é para chamar a quantidade certa de cada jogo que for selecionado
   function clickButton(param) {
-    const button = this ? this : param
+    const button = this ? this : param;
     const selectedAmount = selectedNumbers.length;
     const maxNumbers = app.min_and_max_number;
-    const numberExist = selectedNumbers.findIndex(item =>  item === button.id)
+    const numberExist = selectedNumbers.findIndex(item =>  item === button.id);
     
     if (numberExist == -1) {
       if (selectedAmount > maxNumbers -1) {
@@ -83,7 +84,7 @@
     let $bolls = window.DOM('[data-js="boll-games"]').get().children;
     let bollsArray = Array.from($bolls)
     const emptyNumbers = app.min_and_max_number - selectedNumbers.length
-    
+
     this.style["background-color"] = app.color;
     this.style["color"] = 'white';
     
@@ -91,7 +92,7 @@
       const existNumbers = randomNumbers(app.range);
       const $boll = bollsArray.find(value => { 
         return +value.id === existNumbers
-      });
+      }); 
       clickButton($boll)  
     }
   } 
@@ -107,8 +108,8 @@
 
   // essa função ela limpa o jogo.
   function cleanGame() {
-    this.style["background-color"] = app.color;
-    this.style["color"] = 'white';
+    // this.style["background-color"] = app.color;
+    // this.style["color"] = 'white';
     selectedNumbers = [];
     createBoll()
   }
@@ -216,6 +217,7 @@
    
     number.textContent = selectedNumbers;
     number.style.color = '#868686';
+    number.style.display = 'flexbox';
     number.style.fontFamily = 'IBM Plex Sans';
     number.style.fontStyle = " italic";
     number.style.width = '20px';
@@ -237,7 +239,7 @@
       $dataGame.addEventListener('click', $cart);
       valueTotal()
       text.remove();
-      
+      cleanGame();
     }
     
   }
