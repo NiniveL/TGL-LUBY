@@ -27,7 +27,6 @@
 
    // essa função esta fazendo mudar de um jogo para outro, lotofacil, mega e Quina
    function initGamesButton() {
-    gameButtons = app.color
      games.types.forEach((games, index,) => {
        let $buttonsContainer = window.DOM('[data-js="buttons-game"]').get();
        let $buttonGame = document.createElement('button');
@@ -38,8 +37,12 @@
        $buttonGame.setAttribute("data-js", "games");
        $buttonGame.addEventListener('click', changeGame);
        $buttonsContainer.appendChild($buttonGame);  
-       
       })
+
+      const initialSelectedGame = document.getElementById('0')
+      initialSelectedGame.style["background-color"] = games.types[0].color;
+      initialSelectedGame.style["color"] = 'white';
+      
     gameButtons = Array.from(document.querySelectorAll('[data-js="games"]'));
   };
 
@@ -76,7 +79,7 @@
     } else{
       button.style["background-color"] = '#ADC0C4'
       selectedNumbers.splice(numberExist, 1); 
-    }
+    } 
   };
 
   // essa função ela completa o game total ou parte dele se o cliente não escolher.
@@ -108,8 +111,6 @@
 
   // essa função ela limpa o jogo.
   function cleanGame() {
-    // this.style["background-color"] = app.color;
-    // this.style["color"] = 'white';
     selectedNumbers = [];
     createBoll()
   }
@@ -122,9 +123,9 @@
 
   // essa função ela adiciona os jogos no cart
   function addToCart() {
-    console.log();
     let $cart = window.DOM('[data-js="cart-carrinho"]').get()
-    let text = window.DOM('[data-js="remove-text"]').get()
+    const emptyCartMessage = document.querySelector('[data-js="remove-text"]')
+    emptyCartMessage.classList.add('emptyCart')
     addGameToCart()
     
     let $cartGame = document.createElement('div');
@@ -152,7 +153,7 @@
 
       title.innerHTML += app.type
       title.style.color = app.color;
-      valueGame.innerHTML += app.price;
+      valueGame.innerHTML += `R$ ${app.price}`
       $separatorColor.style.backgroundColor = app.color;
 
     } else if (app.type === app.price) {
@@ -200,6 +201,7 @@
       $dataGame.remove();
       $imgTrash.remove();
       title.remove();
+      // text.remove();
       sumGames -= this.id
       remuveCart();
     }
@@ -225,7 +227,7 @@
     
     
     if (!number.textContent) {
-      alert('Erro, selecione os números')
+      alert('Mistake! select game numbers')
     } else {
       $cart.appendChild($dataGame);
       $dataGame.appendChild(containeTrash)
@@ -238,10 +240,9 @@
       containeTrash.appendChild($imgTrash)
       $dataGame.addEventListener('click', $cart);
       valueTotal()
-      text.remove();
       cleanGame();
+      text.remove()
     }
-    
   }
 
   // essa função ela trás os valores dos jogos e faz a soma de cada Jogo adicionado ao cart
@@ -263,7 +264,12 @@
   function remuveCart() {
     let cartTotal = window.DOM('[data-js="cart-valor"]').get() 
     cartTotal.textContent = currencyFormate(sumGames)
-    sumGames.remove()
+    // sumGames.remove()
+
+    if(sumGames == 0){
+      const emptyCartMessage = document.querySelector('[data-js="remove-text"]')
+      emptyCartMessage.classList.remove('emptyCart')
+    }
   }
   
   // essa função é a descrição e nome de cada jogo.
