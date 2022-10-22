@@ -27,13 +27,12 @@
     },
     {
       "type": "JogoDoBicho",
-      "description": "Escolha 6 números dos 12 disponíveis na quina. 5, 4, 3 ou 2 acertos. São seis sorteios semanais e seis chances de ganhar.",
+      "description": "Escolha 6 números dos 12 disponíveis no JogoDoBicho. se acerta 4 e 3 números você ganha. São seis sorteios semanais e seis chances de ganhar.",
       "range": 12,
       "price": 8.00,
       "min_and_max_number": 6,
       "color": "#0b1d94"
     }
-    
-    
+   
   ]
 }

@@ -67,7 +67,6 @@
     const selectedAmount = selectedNumbers.length;
     const maxNumbers = app.min_and_max_number;
     const numberExist = selectedNumbers.findIndex(item =>  item === button.id);
-    
     if (numberExist == -1) {
       if (selectedAmount > maxNumbers -1) {
         alert('maximum number of balls selected')
@@ -116,9 +115,14 @@
   }
   
   function addGameToCart() {
-    selectedNumbers.sort((a, b) => {
-      return a -= b;
-    });    
+    if(selectedNumbers.length < app.min_and_max_number) {
+     cleanGame(); 
+    
+    }else{
+      selectedNumbers.sort((a, b) => {
+       return a -= b;
+      });    
+   }
   }
 
   // essa função ela adiciona os jogos no cart
@@ -201,30 +205,27 @@
       $dataGame.remove();
       $imgTrash.remove();
       title.remove();
-      // text.remove();
       sumGames -= this.id
       remuveCart();
     }
 
-    $dataGame.style.width = '290px';
-    $dataGame.style.height = '70px';
+    $dataGame.style.width = '295px';
+    $dataGame.style.height = '60px';
     $dataGame.style.alignItems = 'center';
-    $dataGame.style.marginTop = '40px';
-    $dataGame.style.display = 'flex'
+    $dataGame.style.marginTop = '30px';
+    $dataGame.style.display = 'flex';
     
     $cartGame.style.justifyContent = 'center';
-    $cartGame.style.width = '150%';
+    $cartGame.style.width = '130%';
     $cartGame.style.padding = '10px';
-    $cartGame.style.flexWrap = 'wrap';
+    $cartGame.style.display = 'auto';
    
     number.textContent = selectedNumbers;
     number.style.color = '#868686';
-    number.style.display = 'flexbox';
     number.style.fontFamily = 'IBM Plex Sans';
     number.style.fontStyle = " italic";
-    number.style.width = '20px';
+    number.style.width = '50px';
     number.style.fontSize = "17px";
-    
     
     if (!number.textContent) {
       alert('Mistake! select game numbers')
@@ -240,8 +241,7 @@
       containeTrash.appendChild($imgTrash)
       $dataGame.addEventListener('click', $cart);
       valueTotal()
-      cleanGame();
-      text.remove()
+      cleanGame(); 
     }
   }
 
@@ -264,7 +264,6 @@
   function remuveCart() {
     let cartTotal = window.DOM('[data-js="cart-valor"]').get() 
     cartTotal.textContent = currencyFormate(sumGames)
-    // sumGames.remove()
 
     if(sumGames == 0){
       const emptyCartMessage = document.querySelector('[data-js="remove-text"]')
